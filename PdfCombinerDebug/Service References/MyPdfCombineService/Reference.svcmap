@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2fda7edb-9c7a-416f-acee-25e4a7d832f9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:47523/PdfCombineService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PdfCombineService.xsd" MetadataType="Schema" ID="9e887897-b172-4166-8442-828beddb0f13" SourceId="1" SourceUrl="http://localhost:47523/PdfCombineService?xsd=xsd2" />
+    <MetadataFile FileName="PdfCombineService.disco" MetadataType="Disco" ID="670afabd-85a4-43cb-abc2-1c7f785b0063" SourceId="1" SourceUrl="http://localhost:47523/PdfCombineService?disco" />
+    <MetadataFile FileName="PdfCombineService.wsdl" MetadataType="Wsdl" ID="4eedcf61-d2aa-4575-ae1e-5ae4ebc1db7b" SourceId="1" SourceUrl="http://localhost:47523/PdfCombineService?wsdl" />
+    <MetadataFile FileName="PdfCombineService1.xsd" MetadataType="Schema" ID="d1848ad0-0461-430f-90ab-975dedaeb33d" SourceId="1" SourceUrl="http://localhost:47523/PdfCombineService?xsd=xsd1" />
+    <MetadataFile FileName="PdfCombineService2.xsd" MetadataType="Schema" ID="36d3be41-8c29-461e-805e-d4965cbd203e" SourceId="1" SourceUrl="http://localhost:47523/PdfCombineService?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
