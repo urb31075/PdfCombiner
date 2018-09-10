@@ -5,12 +5,15 @@
 <head runat="server">
     <title></title>
     <link rel="stylesheet" href="PdfCombiner.css"/>
+    <script src="/scripts/jquery-3.3.1.js"></script>
+    <script src="/scripts/Default.js"></script>
 </head>
 <body>
     <form id="PdfCombinerWeb" runat="server">
         <asp:scriptmanager id="ScriptManager1" runat="server" />
         <div>
-            <label>WEB-интерфейс для PdfCombiner</label>
+            <label id="myTitleLabel" title="xyz">WEB-интерфейс для PdfCombiner</label>
+            <input type="checkbox" checked="checked"/>
         </div>
         <div>
             <asp:Label ID="StartTimeLabel" runat="server" Text="XX:XX:XX"></asp:Label>

@@ -78,9 +78,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PdfCombinerWcfServiceLibrary\PdfCombinerWcfServiceLibrary.csproj">
+    <ProjectReference Include="..\PdfCombinerWcfServiceLibrary\PdfCombinerWcf.csproj">
       <Project>{a5b203ca-f904-41c5-a8e8-91563356a205}</Project>
-      <Name>PdfCombinerWcfServiceLibrary</Name>
+      <Name>PdfCombinerWcf</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

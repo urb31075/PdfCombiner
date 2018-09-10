@@ -11,11 +11,11 @@
         <Button x:Name="UnInstallButton" Content="Uninstall" HorizontalAlignment="Left" Margin="7,35,0,0" VerticalAlignment="Top" Width="75" Click="UnInstallButtonClick"/>
         <ListBox x:Name="InfoListBox" Margin="91,10,10,10" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
         <Button x:Name="WsdlButton" Content="Wsdl" HorizontalAlignment="Left" Margin="7,160,0,0" VerticalAlignment="Top" Width="75" Click="WsdlButtonClick"/>
-        <Button x:Name="RunButton" Content="Run" HorizontalAlignment="Left" Margin="7,300,0,0" VerticalAlignment="Top" Width="75" Click="RunButtonClick"/>
+        <Button x:Name="RunButton" Content="ParceToC" HorizontalAlignment="Left" Margin="7,300,0,0" VerticalAlignment="Top" Width="75" Click="ParceToCButtonClick"/>
         <Button x:Name="SetHostbutton" Content="Set Host" HorizontalAlignment="Left" Margin="7,101,0,0" VerticalAlignment="Top" Width="75" Click="SetHostbuttonClick"/>
         <Button x:Name="ClearHostButton" Content="Clear Host" HorizontalAlignment="Left" Margin="7,126,0,0" VerticalAlignment="Top" Width="75" Click="ClearHostButtonClick"/>
         <Button x:Name="WcfTestClientButton" Content="WcfTestClient" HorizontalAlignment="Left" Margin="7,185,0,0" VerticalAlignment="Top" Width="75" Click="WcfTestClientButtonClick"/>
-        <Button x:Name="TestServiceButton" Content="TestService" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top" Width="75" Click="TestServiceButtonClick"/>
+        <Button x:Name="BuildButton" Content="MS" HorizontalAlignment="Left" Margin="7,336,0,0" VerticalAlignment="Top" Width="75" Click="BuildButtonClick"/>
 
     </Grid>
 </Window>

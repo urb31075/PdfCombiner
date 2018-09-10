@@ -10,6 +10,7 @@ namespace PdfCombinerDebug
 {
     using System;
     using System.Diagnostics;
+    using System.IO;
     using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.Text;
@@ -17,15 +18,17 @@ namespace PdfCombinerDebug
     using System.Threading.Tasks;
     using System.Windows;
 
-    using PdfCombinerDebug.MyPdfCombineService;
+    using PdfCombinerLibrary;
 
-    using PdfCombinerWcfServiceLibrary;
+    using PdfCombinerWcf;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
+        private readonly SynchronizationContext originalContext = SynchronizationContext.Current;
+
         /// <summary>
         /// The util file name.
         /// </summary>
@@ -54,33 +57,33 @@ namespace PdfCombinerDebug
             //Encoding.GetEncoding(targetCodePage).GetString(Encoding.GetEncoding(strCodePage).GetBytes(str));
             var bytes = Encoding.GetEncoding(strCodePage).GetBytes(str);
             var res = Encoding.GetEncoding(targetCodePage).GetString(bytes);
-            return res; 
+            return res;
         }
 
-        private static string ExecuteOperation(bool unistall)
+        private static string InstallPdfCombinerWindowsServicen(bool unistall)
         {
             try
             {
                 var setuper = new Process
-                    {
-                        StartInfo =
-                            {
-                                 FileName = UtilFileName,
-                                 Arguments = unistall ? @"/u " + UtilArgument : UtilArgument,
-                                 RedirectStandardOutput = true,
-                                 RedirectStandardError = true,
-                                 UseShellExecute = false,
-                                 CreateNoWindow = true
-                            },
-                        EnableRaisingEvents = true
-                    };
-                    setuper.Start();
-                    var output = setuper.StandardOutput.ReadToEnd();
-                    setuper.WaitForExit();
-                    var outputCodePage = setuper.StandardOutput.CurrentEncoding.CodePage;
-                    var targetCodePage = Encoding.GetEncoding("CP866").CodePage;
-                    var convertResult = ConvertCodePage(output, outputCodePage, targetCodePage);
-                    return convertResult;
+                                  {
+                                      StartInfo =
+                                          {
+                                              FileName = UtilFileName,
+                                              Arguments = unistall ? @"/u " + UtilArgument : UtilArgument,
+                                              RedirectStandardOutput = true,
+                                              RedirectStandardError = true,
+                                              UseShellExecute = false,
+                                              CreateNoWindow = true
+                                          },
+                                      EnableRaisingEvents = true
+                                  };
+                setuper.Start();
+                var output = setuper.StandardOutput.ReadToEnd();
+                setuper.WaitForExit();
+                var outputCodePage = setuper.StandardOutput.CurrentEncoding.CodePage;
+                var targetCodePage = Encoding.GetEncoding("CP866").CodePage;
+                var convertResult = ConvertCodePage(output, outputCodePage, targetCodePage);
+                return convertResult;
             }
             catch (Exception ex)
             {
@@ -88,33 +91,37 @@ namespace PdfCombinerDebug
             }
         }
 
-        private async Task<bool> ExecuteOperationAsync(bool unistall)
+        private async Task<bool> InstallPdfCombinerWindowsServicenAsync(bool unistall)
         {
             try
             {
                 var convertResult = string.Empty;
-                await Task.Run(() => 
-                      {
-                          var setuper = new Process
-                          {
-                              StartInfo =
-                               {
-                                    FileName = UtilFileName,
-                                    Arguments = unistall ? @"/u " + UtilArgument : UtilArgument,
-                                    RedirectStandardOutput = true,
-                                    RedirectStandardError = true,
-                                    UseShellExecute = false,
-                                    CreateNoWindow = true
-                               },
-                              EnableRaisingEvents = true
-                          };
-                          setuper.Start();
-                          var output = setuper.StandardOutput.ReadToEnd();
-                          setuper.WaitForExit();
-                          var outputCodePage = setuper.StandardOutput.CurrentEncoding.CodePage;
-                          var targetCodePage = Encoding.GetEncoding("CP866").CodePage;
-                          convertResult = ConvertCodePage(output, outputCodePage, targetCodePage);
-                      });
+                await Task.Run(
+                    () =>
+                        {
+                            var setuper = new Process
+                                              {
+                                                  StartInfo =
+                                                      {
+                                                          FileName = UtilFileName,
+                                                          Arguments =
+                                                              unistall
+                                                                  ? @"/u " + UtilArgument
+                                                                  : UtilArgument,
+                                                          RedirectStandardOutput = true,
+                                                          RedirectStandardError = true,
+                                                          UseShellExecute = false,
+                                                          CreateNoWindow = true
+                                                      },
+                                                  EnableRaisingEvents = true
+                                              };
+                            setuper.Start();
+                            var output = setuper.StandardOutput.ReadToEnd();
+                            setuper.WaitForExit();
+                            var outputCodePage = setuper.StandardOutput.CurrentEncoding.CodePage;
+                            var targetCodePage = Encoding.GetEncoding("CP866").CodePage;
+                            convertResult = ConvertCodePage(output, outputCodePage, targetCodePage);
+                        });
 
                 this.InfoListBox.Items.Add(convertResult);
 
@@ -140,7 +147,7 @@ namespace PdfCombinerDebug
         {
             this.InstallButton.IsEnabled = false;
             this.InfoListBox.Items.Add("Start installing! wait...");
-            var result = await this.ExecuteOperationAsync(false);
+            var result = await this.InstallPdfCombinerWindowsServicenAsync(false);
             this.InfoListBox.Items.Add($"Done! Operation result: {result}");
             this.InstallButton.IsEnabled = true;
         }
@@ -158,7 +165,7 @@ namespace PdfCombinerDebug
         {
             this.UnInstallButton.IsEnabled = false;
             this.InfoListBox.Items.Add("Start uninstalling! wait...");
-            var result = await this.ExecuteOperationAsync(true);
+            var result = await this.InstallPdfCombinerWindowsServicenAsync(true);
             this.InfoListBox.Items.Add($"Operation result {result}");
             this.UnInstallButton.IsEnabled = true;
         }
@@ -174,20 +181,6 @@ namespace PdfCombinerDebug
             Process.Start(WcfTestClient, HostUri);
         }
 
-        private void RunButtonClick(object sender, RoutedEventArgs e)
-        {
-            this.RunButton.IsEnabled = false;
-            this.InfoListBox.Items.Add("Start installing! wait...");
-            var result = string.Empty;
-            var task = Task.Run(() =>
-                     {
-                         result = ExecuteOperation(true);
-                     });
-            task.Wait(20000);
-            this.InfoListBox.Items.Add($"Done! Operation result: {result}");
-            this.RunButton.IsEnabled = true;
-        }
-
         private void SetHostbuttonClick(object sender, RoutedEventArgs e)
         {
             if (this.host != null)
@@ -196,8 +189,8 @@ namespace PdfCombinerDebug
             }
 
             var baseAddress = new Uri(HostUri);
-            this.host = new ServiceHost(typeof(PdfCombineService), baseAddress);
-             
+            this.host = new ServiceHost(typeof(PdfCombinerCommunication), baseAddress);
+
             var smb = new ServiceMetadataBehavior
                           {
                               HttpGetEnabled = true,
@@ -205,7 +198,7 @@ namespace PdfCombinerDebug
                           };
             this.host.Description.Behaviors.Add(smb);
             this.host.Open();
-             
+
             this.InfoListBox.Items.Add($"The service is ready at {HostUri}");
         }
 
@@ -220,15 +213,57 @@ namespace PdfCombinerDebug
             this.InfoListBox.Items.Add($"The service is closed at {HostUri}");
         }
 
-        private async void TestServiceButtonClick(object sender, RoutedEventArgs e)
+        private void ParceToCButtonClick(object sender, RoutedEventArgs e)
         {
-            this.TestServiceButton.IsEnabled = false;
-            var client = new PdfCombineServiceClient();
-            this.InfoListBox.Items.Add(@"Send reqest");
-            var data = await client.GetDataLongTimeAsync(25);
-            this.InfoListBox.Items.Add($"Reciwe data {data}");
-            client.Close();
-            this.TestServiceButton.IsEnabled = true;
+            for (var number = 1; number < 2; number++)
+            {
+                var fileName = $@"D:\DOCINPUT\{number}ex.docx";
+                if (!File.Exists(fileName))
+                {
+                    fileName = $@"D:\DOCINPUT\{number}ex.doc";
+                    if (!File.Exists(fileName))
+                    {
+                        this.InfoListBox.Items.Add($"{fileName}(.docx) not exists!");
+                        continue;
+                    }
+                }
+
+                this.InfoListBox.Items.Add("********************************************************************************************************************************");
+                this.InfoListBox.Items.Add(fileName);
+                this.InfoListBox.Items.Add("********************************************************************************************************************************");
+
+                var tableOfContentExtractor = new TableOfContentExtractor();
+                var tableOfContentResult = tableOfContentExtractor.ExtractTableOfContent(fileName);
+                foreach (var item in tableOfContentResult.Items)
+                {
+                    this.InfoListBox.Items.Add($"{item.Page} | {item.StyleInfo} |{item.Content}");
+                }
+            }
+        }
+
+        private async void BuildButtonClick(object sender, RoutedEventArgs e)
+        {
+            var msbuild = new MsBuild();
+            var msbuildPath = @"C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe";
+            var prjFile = @"C:\InvestorFullCompilation\InvestorFullCompilation\InvestorFullCompilation.sln";
+            var commandLine = @"/t:Rebuild /p:Configuration=Release";   // /p:RunCodeAnalysis=true
+
+            this.InfoListBox.Items.Clear();
+            var result = await msbuild.Execute(msbuildPath, prjFile, commandLine, this.OutMessage);
+            this.InfoListBox.Items.Add(result.ToString());
+            foreach (string item in this.InfoListBox.Items)
+            {
+                if (item.Contains("Сборка успешно завершена."))
+                {
+                    this.InfoListBox.Items.Add("MsBuild Ok!");
+                    break;
+                }
+            }
+        }
+
+        private void OutMessage(string message)
+        {
+            this.originalContext.Post(c => { this.InfoListBox.Items.Add(c.ToString()); }, message);
         }
     }
 }

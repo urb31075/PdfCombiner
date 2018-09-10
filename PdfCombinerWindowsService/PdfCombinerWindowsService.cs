@@ -18,7 +18,7 @@ namespace PdfCombiner
     using System.ServiceModel.Description;
     using System.ServiceProcess;
 
-    using PdfCombinerWcfServiceLibrary;
+    using PdfCombinerWcf;
 
     // https://msdn.microsoft.com/ru-ru/library/vstudio/zt39148a%28v=vs.110%29.aspx
     // installutil.exe Service.exe
@@ -154,7 +154,7 @@ namespace PdfCombiner
             }
 
             var baseAddress = new Uri(HostUri);
-            this.host = new ServiceHost(typeof(PdfCombineService), baseAddress);
+            this.host = new ServiceHost(typeof(PdfCombinerCommunication), baseAddress);
 
             var smb = new ServiceMetadataBehavior
             {

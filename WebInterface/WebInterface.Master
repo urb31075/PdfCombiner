@@ -1,0 +1,27 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="WebInterface.master.cs" Inherits="WebInterface.WebInterface" %>
+<%@ Import Namespace="System.Globalization" %>
+<%@ Register Src="~/Controls/IndiControl.ascx" TagPrefix="uc1" TagName="IndiControl" %>
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>WEB INTERFACE</title>
+    <h1>WEB INTERFACE</h1>
+        <asp:ContentPlaceHolder ID="head" runat="server">
+        </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+    <h2>MAIN CONTENT</h2>
+        <asp:ContentPlaceHolder ID="bodyContent" runat="server">
+        </asp:ContentPlaceHolder>
+
+    <h2>FOOTER CONTENT</h2>
+        <uc1:IndiControl runat="server" ID="IndiControl" />
+        <asp:ContentPlaceHolder ID="footerContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

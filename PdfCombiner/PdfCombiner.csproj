@@ -68,9 +68,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PdfCombinerWcfServiceLibrary\PdfCombinerWcfServiceLibrary.csproj">
+    <ProjectReference Include="..\PdfCombinerLibrary\PdfCombinerLibrary.csproj">
+      <Project>{4ae73eb1-5661-4436-b95e-d13a332644fb}</Project>
+      <Name>PdfCombinerLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PdfCombinerWcfServiceLibrary\PdfCombinerWcf.csproj">
       <Project>{a5b203ca-f904-41c5-a8e8-91563356a205}</Project>
-      <Name>PdfCombinerWcfServiceLibrary</Name>
+      <Name>PdfCombinerWcf</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -9,9 +9,13 @@
 namespace PdfCombiner
 {
     using System;
+    using System.Runtime.CompilerServices;
+
     using MyPdfServiceReference;
 
-    using PdfCombinerWcfServiceLibrary;
+    using PdfCombinerLibrary;
+
+    using PdfCombinerWcf;
 
     /// <summary>
     /// The program.
@@ -26,10 +30,14 @@ namespace PdfCombiner
         /// </param>
         public static void Main(string[] args)
         {
-            var pdfCombineService = new PdfCombineService();
-            var result = pdfCombineService.GetDataLongTime(25);
-            Console.WriteLine("Reciwe data");
-            Console.WriteLine(result);
+            var pdfCombinerCommunication = new PdfCombinerCommunication();
+
+            var result1 = pdfCombinerCommunication.GetData();
+            var result2 = pdfCombinerCommunication.GetData(15);
+            var result3 = pdfCombinerCommunication.GetData(25, "xxx");
+            Console.WriteLine(result1);
+            Console.WriteLine(result2);
+            Console.WriteLine(result3);
             Console.ReadLine();
         }
     }

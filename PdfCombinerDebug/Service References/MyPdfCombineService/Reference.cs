@@ -9,8 +9,8 @@
 //------------------------------------------------------------------------------
 
 namespace PdfCombinerDebug.MyPdfCombineService {
-    
-    
+    using PdfCombinerWcf;
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MyPdfCombineService.IPdfCombineService")]
     public interface IPdfCombineService {
@@ -28,10 +28,10 @@ namespace PdfCombinerDebug.MyPdfCombineService {
         System.Threading.Tasks.Task<string> GetDataLongTimeAsync(int value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPdfCombineService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IPdfCombineService/GetDataUsingDataContractResponse")]
-        PdfCombinerWcfServiceLibrary.CompositeType GetDataUsingDataContract(PdfCombinerWcfServiceLibrary.CompositeType composite);
+        CompositeType GetDataUsingDataContract(CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPdfCombineService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IPdfCombineService/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<PdfCombinerWcfServiceLibrary.CompositeType> GetDataUsingDataContractAsync(PdfCombinerWcfServiceLibrary.CompositeType composite);
+        System.Threading.Tasks.Task<CompositeType> GetDataUsingDataContractAsync(CompositeType composite);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -77,11 +77,11 @@ namespace PdfCombinerDebug.MyPdfCombineService {
             return base.Channel.GetDataLongTimeAsync(value);
         }
         
-        public PdfCombinerWcfServiceLibrary.CompositeType GetDataUsingDataContract(PdfCombinerWcfServiceLibrary.CompositeType composite) {
+        public CompositeType GetDataUsingDataContract(CompositeType composite) {
             return base.Channel.GetDataUsingDataContract(composite);
         }
         
-        public System.Threading.Tasks.Task<PdfCombinerWcfServiceLibrary.CompositeType> GetDataUsingDataContractAsync(PdfCombinerWcfServiceLibrary.CompositeType composite) {
+        public System.Threading.Tasks.Task<CompositeType> GetDataUsingDataContractAsync(CompositeType composite) {
             return base.Channel.GetDataUsingDataContractAsync(composite);
         }
     }
