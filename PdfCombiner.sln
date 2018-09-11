@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebInterface", "WebInterfac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zipec", "Zipec\Zipec.csproj", "{B90F9CE5-F51D-40AD-9DC1-9C810497D08E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestService", "RestService\RestService.csproj", "{145F1D71-923D-4C33-AC57-6BEF6B31429B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{B90F9CE5-F51D-40AD-9DC1-9C810497D08E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B90F9CE5-F51D-40AD-9DC1-9C810497D08E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B90F9CE5-F51D-40AD-9DC1-9C810497D08E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{145F1D71-923D-4C33-AC57-6BEF6B31429B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{145F1D71-923D-4C33-AC57-6BEF6B31429B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{145F1D71-923D-4C33-AC57-6BEF6B31429B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{145F1D71-923D-4C33-AC57-6BEF6B31429B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
