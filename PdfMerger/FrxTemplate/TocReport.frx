@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="09/12/2018 10:53:57" ReportInfo.Modified="09/12/2018 11:08:24" ReportInfo.CreatorVersion="2017.2.22.0">
+  <Dictionary>
+    <BusinessObjectDataSource Name="Toc1" ReferenceName="Toc1" DataType="System.Collections.Generic.List`1[[PdfMerger.MainForm+TocData, PdfMerger, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <Column Name="PageNumber" DataType="System.Int32"/>
+      <Column Name="PageTitle" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="Toc2" ReferenceName="Toc2" DataType="System.Collections.Generic.List`1[[PdfMerger.MainForm+TocData, PdfMerger, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <Column Name="PageNumber" DataType="System.Int32"/>
+      <Column Name="PageTitle" DataType="System.String"/>
+    </BusinessObjectDataSource>
+    <BusinessObjectDataSource Name="Src" ReferenceName="Src" DataType="System.Collections.Generic.List`1[[PdfMerger.MainForm+SrcData, PdfMerger, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]" Enabled="true">
+      <Column Name="PageLabel" DataType="System.String"/>
+    </BusinessObjectDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <DataBand Name="Data1" Width="718.2" Height="18.9" DataSource="Toc1">
+      <TextObject Name="Text1" Left="75.6" Width="472.5" Height="18.9" Border.Lines="All" Text="[Toc1.PageTitle]"/>
+      <TextObject Name="Text2" Left="548.1" Width="94.5" Height="18.9" Border.Lines="All" Hyperlink.Kind="PageNumber" Hyperlink.Expression="[Toc1.PageNumber]" Text="[Toc1.PageNumber]"/>
+    </DataBand>
+    <OverlayBand Name="Overlay1" Top="21.53" Width="718.2" Height="444.15">
+      <ShapeObject Name="Shape1" Left="9.45" Top="9.45" Width="699.3" Height="415.8"/>
+      <ShapeObject Name="Shape3" Left="28.35" Top="28.35" Width="652.05" Height="378"/>
+    </OverlayBand>
+  </ReportPage>
+  <ReportPage Name="Page2">
+    <DataBand Name="Data2" Width="718.2" Height="18.9" DataSource="Toc2">
+      <TextObject Name="Text4" Left="75.6" Width="472.5" Height="18.9" Border.Lines="All" Text="[Toc2.PageTitle]"/>
+      <TextObject Name="Text5" Left="548.1" Width="94.5" Height="18.9" Border.Lines="All" Hyperlink.Kind="PageNumber" Hyperlink.Expression="[Toc1.PageNumber]" Text="[Toc2.PageNumber]"/>
+    </DataBand>
+    <OverlayBand Name="Overlay2" Top="21.53" Width="718.2" Height="434.7">
+      <ShapeObject Name="Shape2" Left="56.7" Top="47.25" Width="585.9" Height="340.2" Shape="Ellipse"/>
+      <ShapeObject Name="Shape4" Left="75.6" Top="85.05" Width="557.55" Height="274.05" Shape="Ellipse"/>
+    </OverlayBand>
+  </ReportPage>
+  <ReportPage Name="Page3">
+    <DataBand Name="Data3" Width="718.2" Height="37.8" StartNewPage="true" DataSource="Src">
+      <TextObject Name="Text3" Left="529.2" Top="9.45" Width="170.1" Height="18.9" Border.Lines="All" Text="[Src.PageLabel]"/>
+    </DataBand>
+  </ReportPage>
+</Report>
